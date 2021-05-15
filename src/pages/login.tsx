@@ -1,6 +1,7 @@
 // Libs
-import { ReactElement, useState } from 'react'
+import { ReactElement, useEffect, useState } from 'react';
 import { useRouter } from 'next/router'
+import { gql, useMutation } from '@apollo/client'
 // Custom Functions
 import { withoutAuth } from '../lib'
 // Components
@@ -8,28 +9,50 @@ import Layout from '../components/Layout'
 // Hooks
 import { useAuth } from '../providers/Auth'
 
+const LOGIN = gql`
+  mutation login ($input: SessionInput!) {
+    login (input: $input) {
+      developerCode
+      message
+    }
+  }
+`
+
 const Login = (): ReactElement => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const [login, { data, loading, error }] = useMutation(LOGIN)
   const { setAuthenticated } = useAuth()
   const router = useRouter()
   const submitHandler = async (event): Promise<void> => {
     event.preventDefault()
-    const response = await fetch('/api/login', {
-      method: 'POST',
-      credentials: 'same-origin',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ username, password })
+    await login({
+      variables: {
+        input: {
+          cellPhone: username,
+          password
+        }
+      }
     })
-    if (response.status === 200) {
-      setAuthenticated(true)
-      router.push('/profile')
-    } else {
-      console.error('Login error', response)
-    }
   }
+
+  useEffect(() => {
+    if (data !== undefined) {
+      if (data.login.developerCode === 'SUCCESS_QUERY') {
+        setAuthenticated(true)
+        router.push('/profile')
+      }
+    }
+  }, [data])
+
+  if (loading) {
+    return <h2>Loading...</h2>
+  }
+
+  if (error) {
+    console.error(error)
+  }
+
   return (
     <Layout>
       <h1>Login</h1>

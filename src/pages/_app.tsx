@@ -1,14 +1,22 @@
 // Libs
 import { ReactElement } from 'react'
 import { AppContext, AppProps } from 'next/app'
+import { ApolloProvider } from '@apollo/client'
 // Components
 import { AuthProvider } from '../providers/Auth'
+// Hooks
+import { useApollo } from '../libs/Apollo'
 
-const MyApp = ({ Component, pageProps }: AppProps): ReactElement => (
-    <AuthProvider>
-      <Component {...pageProps} />
-    </AuthProvider>
-)
+const MyApp = ({ Component, pageProps }: AppProps): ReactElement => {
+  const apolloClient = useApollo()
+  return (
+    <ApolloProvider client={apolloClient}>
+      <AuthProvider>
+        <Component {...pageProps} />
+      </AuthProvider>
+    </ApolloProvider>
+  )
+}
 
 interface Props {
   pageProps: unknown

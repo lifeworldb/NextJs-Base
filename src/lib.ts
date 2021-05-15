@@ -1,7 +1,14 @@
 import { GetServerSideProps, GetServerSidePropsContext } from 'next'
 
 function hasAuth (context: GetServerSidePropsContext): boolean {
-  return !!context.req.cookies?.session
+  return (!!context.req.cookies['access-token'] || !!context.req.cookies['refresh-token'])
+}
+
+export interface AuthServerSideProps {
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  props?: {}
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  redirect?: {}
 }
 
 export const withAuth: GetServerSideProps = async context => {

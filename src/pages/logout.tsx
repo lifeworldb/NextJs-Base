@@ -21,6 +21,7 @@ const Logout = (): ReactElement => {
     }
     doLogout()
   }, [setAuthenticated])
+
   return <p>Logging out...</p>
 }
 

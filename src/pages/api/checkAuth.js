@@ -5,6 +5,6 @@ import cookie from 'cookie';
 export default (req, res) => {
   const cookies = cookie.parse(req.headers.cookie || '');
   res.status(200).json({
-    auth: !!cookies.session
+    auth: (!!cookies['access-token'] || !!cookies['refresh-token'])
   });
 };
