@@ -1,5 +1,5 @@
 // Libs
-import { ReactElement, useEffect, useState } from 'react';
+import { ReactElement, useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { gql, useMutation } from '@apollo/client'
 // Custom Functions

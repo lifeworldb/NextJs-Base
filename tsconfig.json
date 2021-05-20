@@ -17,6 +17,8 @@
       "baseUrl": "./src",
       "paths": {
         "public/*": ["./public/*"],
+        "@store/*": ["./store/*"],
+        "@utils/*": ["./utils/*"]
       },
       "typeRoots": ["node_modules/@types"]
     },

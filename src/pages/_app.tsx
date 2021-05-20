@@ -3,6 +3,7 @@ import { ReactElement } from 'react'
 import { AppContext, AppProps } from 'next/app'
 import { ApolloProvider } from '@apollo/client'
 // Components
+import { wrapper } from '@store/store'
 import { AuthProvider } from '../providers/Auth'
 // Hooks
 import { useApollo } from '../libs/Apollo'
@@ -32,4 +33,4 @@ MyApp.getInitialProps = async ({ Component, ctx }: AppContext): Promise<Props> =
   }
 }
 
-export default MyApp
+export default wrapper.withRedux(MyApp)
