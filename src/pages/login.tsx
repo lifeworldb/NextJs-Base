@@ -2,6 +2,7 @@
 import { ReactElement, useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { gql, useMutation } from '@apollo/client'
+import { GetServerSideProps } from 'next'
 // Custom Functions
 import { withoutAuth } from '../lib'
 // Components
@@ -83,6 +84,6 @@ const Login = (): ReactElement => {
   )
 }
 
-export const getServerSideProps = withoutAuth
+export const getServerSideProps: GetServerSideProps = withoutAuth
 
 export default Login

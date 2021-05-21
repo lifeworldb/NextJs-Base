@@ -1,5 +1,6 @@
 // Libs
 import { ReactElement, useEffect } from 'react'
+import { GetServerSideProps } from 'next'
 import { useRouter } from 'next/router'
 // custom Functions
 import { withAuth } from '../lib'
@@ -25,6 +26,6 @@ const Logout = (): ReactElement => {
   return <p>Logging out...</p>
 }
 
-export const getServerSideProps = withAuth
+export const getServerSideProps: GetServerSideProps = withAuth
 
 export default Logout
