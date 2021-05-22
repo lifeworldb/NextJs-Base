@@ -2,31 +2,33 @@
 import { ReactElement } from 'react'
 import Link from 'next/link'
 // Hooks
+import useTranslation from 'next-translate/useTranslation'
 import { useIsAuthenticated } from '../providers/Auth'
 
 const Header = (): ReactElement => {
+  const { t } = useTranslation()
   const isAuthenticated = useIsAuthenticated()
   return (
     <header>
       <Link href="/">
-        <a>Home</a>
+        <a>{t('header:home')}</a>
       </Link>{' '}
       |{' '}
       {isAuthenticated
         ? (
         <>
           <Link href="/profile">
-            <a>Profile</a>
+            <a>{t('header:profile')}</a>
           </Link>{' '}
           |{' '}
           <Link href="/logout">
-            <a>Logout</a>
+            <a>{t('header:logout')}</a>
           </Link>
         </>
           )
         : (
         <Link href="/login">
-          <a>Login</a>
+          <a>{t('header:login')}</a>
         </Link>
           )}
       <hr />

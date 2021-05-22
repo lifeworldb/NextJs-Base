@@ -33,6 +33,8 @@
       "import/extensions": 0,
       "react/jsx-props-no-spreading": 0,
       "jsx-a11y/anchor-is-valid": 0,
+      "jsx-a11y/anchor-has-content": 0,
+      "jsx-a11y/control-has-associated-label": 0,
       "max-lines": ["warn", { "max": 200, "skipBlankLines": true }],
       "max-len": [
         "error",

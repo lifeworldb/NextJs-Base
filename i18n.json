@@ -1,0 +1,11 @@
+{
+  "locales": ["en", "es"],
+  "defaultLocale": "en",
+  "pages": {
+    "*": ["common", "header"],
+    "/": ["home"],
+    "/login": ["login"],
+    "/logout": ["logout"],
+    "/profile": ["profile"]
+  }
+}

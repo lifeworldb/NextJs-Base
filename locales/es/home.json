@@ -1,0 +1,11 @@
+{
+  "title": "Bienvenido a <a>Next.js!</a>",
+  "p1": "Empiece por editar <code>pages/index.js</code>",
+  "p2-counter": {
+    "0": "No se han realizado clics.",
+    "one": "Estado de cuenta: {{count}} clic.",
+    "other": "Estado de cuenta: {{count}} clics",
+    "999": "¡Guau! Ha hecho muchos clics."
+  },
+  "btn-counter": "Incrementar clics"
+}

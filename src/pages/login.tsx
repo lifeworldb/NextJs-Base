@@ -9,6 +9,7 @@ import { withoutAuth } from '../lib'
 import Layout from '../components/Layout'
 // Hooks
 import { useAuth } from '../providers/Auth'
+import useTranslation from 'next-translate/useTranslation';
 
 const LOGIN = gql`
   mutation login ($input: SessionInput!) {
@@ -23,6 +24,7 @@ const Login = (): ReactElement => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [login, { data, loading, error }] = useMutation(LOGIN)
+  const { t } = useTranslation()
   const { setAuthenticated } = useAuth()
   const router = useRouter()
   const submitHandler = async (event): Promise<void> => {
@@ -47,7 +49,7 @@ const Login = (): ReactElement => {
   }, [data])
 
   if (loading) {
-    return <h2>Loading...</h2>
+    return <h2>{t('common:loading')}</h2>
   }
 
   if (error) {
@@ -56,11 +58,11 @@ const Login = (): ReactElement => {
 
   return (
     <Layout>
-      <h1>Login</h1>
+      <h1>{t('login:title')}</h1>
       <form onSubmit={submitHandler}>
         <div>
           <label>
-            Username{' '}
+            {t('login:lbl-username')}{' '}
             <input
               type="text"
               value={username}
@@ -70,7 +72,7 @@ const Login = (): ReactElement => {
         </div>
         <div>
           <label>
-            Password{' '}
+            {t('login:lbl-password')}{' '}
             <input
               type="password"
               value={password}
@@ -78,7 +80,7 @@ const Login = (): ReactElement => {
             />
           </label>
         </div>
-        <button type="submit">Login</button>
+        <button type="submit">{t('login:btn-login')}</button>
       </form>
     </Layout>
   )

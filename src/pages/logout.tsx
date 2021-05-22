@@ -2,12 +2,14 @@
 import { ReactElement, useEffect } from 'react'
 import { GetServerSideProps } from 'next'
 import { useRouter } from 'next/router'
+import useTranslation from 'next-translate/useTranslation'
 // custom Functions
 import { withAuth } from '../lib'
 // Hooks
 import { useAuth } from '../providers/Auth'
 
 const Logout = (): ReactElement => {
+  const { t } = useTranslation()
   const { setAuthenticated } = useAuth()
   const router = useRouter()
   useEffect(() => {
@@ -23,7 +25,7 @@ const Logout = (): ReactElement => {
     doLogout()
   }, [setAuthenticated])
 
-  return <p>Logging out...</p>
+  return <p>{t('logout:msg')}</p>
 }
 
 export const getServerSideProps: GetServerSideProps = withAuth

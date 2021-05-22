@@ -1,8 +1,9 @@
 // Libs
 import { ReactElement } from 'react'
-import { gql, useQuery } from '@apollo/client'
-// Custom Functions
 import { GetServerSideProps } from 'next'
+import { gql, useQuery } from '@apollo/client'
+import useTranslation from 'next-translate/useTranslation'
+// Custom Functions
 import { withAuth } from '../lib'
 // Components
 import Layout from '../components/Layout'
@@ -23,10 +24,11 @@ const ME = gql`
 `
 
 const Profile = (): ReactElement => {
+  const { t } = useTranslation()
   const { data, loading, error } = useQuery(ME, { pollInterval: 2000 })
 
   if (loading) {
-    return <h2>Loading...</h2>
+    return <h2>{t('common:loading')}</h2>
   }
 
   if (error) {
@@ -37,8 +39,8 @@ const Profile = (): ReactElement => {
 
   return (
     <Layout>
-      <h1>Profile</h1>
-      <h2>Name: {me.name}</h2>
+      <h1>{t('profile:title')}</h1>
+      <h2>{t('profile:name', { name: me.name })}</h2>
     </Layout>
   )
 }
